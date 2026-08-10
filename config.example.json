@@ -1,0 +1,9 @@
+{
+  "base_url": "https://infyspringboard.onwingspan.com",
+  "root_org": "infosysheadstart",
+  "org": "infosysheadstart",
+  "auth": {
+    "auth-token": "YOUR_KEYCLOAK_BEARER_TOKEN_HERE",
+    "wid": "YOUR_USER_WID_HERE"
+  }
+}
