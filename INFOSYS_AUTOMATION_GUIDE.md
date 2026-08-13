@@ -206,29 +206,25 @@ Create or edit `~/.infosys-course/config.json`:
 ## 💻 Step-by-Step Usage Guide
 
 ### Step 1: Install Dependencies
-```bash
-cd c:\infosys-automation
-pip install -r requirements.txt
+```powershell
+py -m pip install -r requirements.txt
 ```
 
-### Step 2: Sync Authentication Token
-Launch Chrome with remote debugging, log into Springboard, then execute:
-```bash
-python sync_token.py
-```
+### Step 2: Open Chrome & Sync Token
+1. Close all open Chrome windows, then run this command to start Chrome with remote debugging:
+   ```powershell
+   & "C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir=C:\chrome-debug
+   ```
+2. Log into [Infosys Springboard](https://infyspringboard.onwingspan.com) in the new Chrome window.
+3. Sync your token:
+   ```powershell
+   py sync_token.py
+   ```
 
-### Step 3: Run the Auto-Completer
-Use a course URL or bare course ID:
-
-```bash
-# Using Course URL:
-python run.py "https://infyspringboard.onwingspan.com/web/en/app/toc/lex_auth_012760837643722752345_shared/overview"
-
-# Using Course ID:
-python run.py lex_auth_012760837643722752345_shared
-
-# Fast execution (skipping auth verification check):
-python run.py lex_auth_012760837643722752345_shared --skip-verify
+### Step 3: Run Course Completion
+Run the auto-completer by pasting your course URL:
+```powershell
+py run.py "https://infyspringboard.onwingspan.com/web/en/app/toc/lex_auth_012760837643722752345_shared/overview"
 ```
 
 ---
@@ -248,11 +244,11 @@ python run.py lex_auth_012760837643722752345_shared --skip-verify
 
 ### 1. `401 Unauthorized` Error
 - **Cause**: JWT token has expired (tokens typically expire after a few hours).
-- **Fix**: Open Springboard in Chrome and re-run `python sync_token.py`.
+- **Fix**: Open Springboard in Chrome and re-run `py sync_token.py`.
 
 ### 2. `Cannot connect to browser debugger at http://127.0.0.1:9222/json`
-- **Cause**: Chrome/Edge is not running with `--remote-debugging-port=9222`.
-- **Fix**: Close all Chrome instances and launch Chrome using the command provided in [Method A](#method-a-automated-token-sync-recommended).
+- **Cause**: Chrome is not running with `--remote-debugging-port=9222`.
+- **Fix**: Close all Chrome instances and launch Chrome using the command provided in [Step 2](#step-2-open-chrome--sync-token).
 
 ### 3. `403 Forbidden` Error
 - **Cause**: Missing or incorrect `rootOrg` / `org` headers.

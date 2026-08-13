@@ -15,76 +15,36 @@ A fast, automated course completer for **Infosys Springboard** (Wingspan learnin
 
 ## 🛠️ Quick Start
 
-### 1. Clone & Install Dependencies
+### 1. Install Dependencies
 
-```bash
-git clone https://github.com/YOUR_USERNAME/infosys-automation.git
-cd infosys-automation
-pip install -r requirements.txt
+```powershell
+py -m pip install -r requirements.txt
 ```
 
 ---
 
 ### 2. Configure Authentication
 
-Choose **Method A** (Automatic) or **Method B** (Manual):
-
-#### **Method A: Automatic Token Extraction via Browser (Recommended)**
-
-1. Launch Chrome or Edge with Remote Debugging enabled:
-
-   **Windows (Chrome):**
+1. Close all Chrome windows, then launch Chrome with remote debugging:
    ```powershell
    & "C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir=C:\chrome-debug
    ```
 
-   **Mac / Linux (Chrome):**
-   ```bash
-   google-chrome --remote-debugging-port=9222 --user-data-dir=/tmp/chrome-debug
+2. Log into [Infosys Springboard](https://infyspringboard.onwingspan.com) in the new browser window.
+
+3. Sync your token:
+   ```powershell
+   py sync_token.py
    ```
-
-2. In the opened browser window, log into [Infosys Springboard](https://infyspringboard.onwingspan.com) and navigate to any course page.
-
-3. Run the token sync utility:
-   ```bash
-   python sync_token.py
-   ```
-   *This automatically extracts your active JWT token and `wid` into `~/.infosys-course/config.json`.*
-
----
-
-#### **Method B: Manual Configuration**
-
-1. Copy `config.example.json` to your home directory or project root:
-   - File path: `~/.infosys-course/config.json`
-
-2. Open the file and insert your authentication credentials:
-   ```json
-   {
-     "base_url": "https://infyspringboard.onwingspan.com",
-     "root_org": "infosysheadstart",
-     "org": "infosysheadstart",
-     "auth": {
-       "auth-token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIs...",
-       "wid": "your-uuid-wid-here"
-     }
-   }
-   ```
-   > **How to get your credentials manually:**
-   > - Open DevTools (`F12`) on Springboard → **Application** tab → **Local Storage** → search for `kc` (token) and `wid`.
 
 ---
 
 ### 3. Run Course Completion
 
-Run the completer using a **full course URL** or **course ID**:
+Run the auto-completer by pasting your course URL:
 
-```bash
-# Using full course URL:
-python run.py "https://infyspringboard.onwingspan.com/web/en/app/toc/lex_auth_012760837643722752345_shared/overview"
-
-# Using bare course ID:
-python run.py lex_auth_012760837643722752345_shared
+```powershell
+py run.py "https://infyspringboard.onwingspan.com/web/en/app/toc/lex_auth_012760837643722752345_shared/overview"
 ```
 
 ---
