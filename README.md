@@ -1,5 +1,8 @@
 # Async Web Automation & Telemetry Engine
 
+[![CI Pipeline](https://github.com/kushagar-debug/async-web-automation-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/kushagar-debug/async-web-automation-engine/actions)
+[![Docker Ready](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](#-docker-containerization)
+[![Tests](https://img.shields.io/badge/Tests-Pytest%20Passing-brightgreen?logo=pytest&logoColor=white)](#-developer--testing-guide)
 [![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-blue?logo=python&logoColor=white)](https://python.org)
 [![Playwright](https://img.shields.io/badge/Playwright-Async%20Engine-2EAD33?logo=playwright&logoColor=white)](https://playwright.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -202,6 +205,23 @@ USER_ID=usr_worker_012345
 MAX_CONCURRENCY=5
 BROWSER_HEADLESS=true
 LOG_LEVEL=INFO
+```
+
+---
+
+## 🐳 Docker Containerization
+
+Run the engine anywhere in an isolated, production-grade Linux container:
+
+```bash
+# 1. Build Docker image
+docker build -t async-web-automation-engine:latest .
+
+# 2. Run simulation / dry-run in container
+docker run --rm async-web-automation-engine:latest sample-target --dry-run
+
+# 3. Run with environment variables mounted
+docker run --rm --env-file .env async-web-automation-engine:latest "target-id" --concurrency 8
 ```
 
 ---

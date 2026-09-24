@@ -7,10 +7,15 @@ session serialization, and batch execution reporting.
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field
+
+
+def utc_now() -> datetime:
+    """Helper returning timezone-aware current UTC time."""
+    return datetime.now(timezone.utc)
 
 
 class StepStatus(str, Enum):
@@ -59,14 +64,17 @@ class SessionState(BaseModel):
     cookies: List[Dict[str, Any]] = Field(default_factory=list, description="Serialized browser cookies")
     local_storage: Dict[str, str] = Field(default_factory=dict, description="Extracted localStorage items")
     expires_at: Optional[datetime] = Field(default=None, description="Token expiration timestamp")
-    created_at: datetime = Field(default_factory=datetime.utcnow, description="Record creation time")
+    created_at: datetime = Field(default_factory=utc_now, description="Record creation time")
 
     @property
     def is_expired(self) -> bool:
         """Checks if session token has surpassed its expiration threshold."""
         if not self.expires_at:
             return False
-        return datetime.utcnow() >= self.expires_at
+        # Normalize timezone awareness if comparison is needed
+        current = utc_now()
+        exp = self.expires_at if self.expires_at.tzinfo else self.expires_at.replace(tzinfo=timezone.utc)
+        return current >= exp
 
 
 class TelemetryEvent(BaseModel):
@@ -75,7 +83,7 @@ class TelemetryEvent(BaseModel):
     """
     event_id: str
     event_type: str
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    timestamp: datetime = Field(default_factory=utc_now)
     node_id: str
     status: StepStatus
     duration_seconds: float = 0.0
@@ -92,7 +100,7 @@ class ExecutionReport(BaseModel):
     skipped_nodes: int = 0
     failed_nodes: int = 0
     duration_seconds: float = 0.0
-    start_time: datetime = Field(default_factory=datetime.utcnow)
+    start_time: datetime = Field(default_factory=utc_now)
     end_time: Optional[datetime] = None
     node_details: List[Dict[str, Any]] = Field(default_factory=list)
 
