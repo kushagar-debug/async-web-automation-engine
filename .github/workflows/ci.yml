@@ -40,10 +40,14 @@ jobs:
           python -m py_compile main.py run.py sync_token.py config/*.py core/*.py handlers/*.py utils/*.py
 
       - name: Run Pytest Suite
+        env:
+          PYTHONPATH: .
         run: |
-          pytest tests/ -v
+          python -m pytest tests/ -v
 
       - name: Smoke Test CLI Dry-Run
+        env:
+          PYTHONPATH: .
         run: |
           python main.py sample-target --dry-run
 
