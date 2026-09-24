@@ -109,3 +109,7 @@ desktop.ini
 scratch/
 tmp/
 temp/
+
+# Personal Notes & Interview Guides (NEVER commit to GitHub)
+PROJECT_MASTER_GUIDE.md
+*.local.md
