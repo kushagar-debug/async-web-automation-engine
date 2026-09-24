@@ -9,7 +9,7 @@
 
 > **Enterprise-grade Asynchronous Event-Driven Web Automation & Telemetry Engine** engineered for high-throughput workflow execution, single-page application (SPA) state synchronization, and resilient session orchestration.
 
-Developed by [Kushagar Sharma](https://github.com/kushagar-debug) as a flagship demonstration of high-performance asynchronous systems, dynamic DOM lifecycle instrumentation, and cloud-ready backend telemetry.
+Developed by [Kushagar Rayat](https://github.com/kushagar-debug) as a flagship demonstration of high-performance asynchronous systems, dynamic DOM lifecycle instrumentation, and cloud-ready backend telemetry.
 
 ---
 
